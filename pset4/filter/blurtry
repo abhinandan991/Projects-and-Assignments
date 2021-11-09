@@ -1,0 +1,75 @@
+void reflect(int height, int width, RGBTRIPLE image[height][width])
+{
+    BYTE tempred[height][width];
+    BYTE tempgreen[height][width];
+    BYTE tempblue[height][width];
+    for (int q=0;q<height;q++)
+    {
+        for (int w=0;w<width;w++)
+        {
+            tempred[q][w]=image[q][w].rgbtRed;
+            tempgreen[q][w]=image[q][w].rgbtGreen;
+            tempblue[q][w]=image[q][w].rgbtBlue;
+        }
+    }
+    for (int i=0;i<height;i++)
+    {
+        for (int j=0;j<width;j++)
+        {
+            float r,g,b;
+            for (int h=(i-1);h<(i+2);h++)
+            {
+                for (int k=(j-1);k<(j+2);k++)
+                {
+                    if ((h<0) || (h>(height-1)) || (k<0) || (k>(width-1)))
+                    {
+                        r=r+0;
+                        g=g+0;
+                        b=b+0;
+                        continue;
+                    }
+                    r=r+image[h][k].rgbtRed;
+                    g=g+image[h][k].rgbtGreen;
+                    b=b+image[h][k].rgbtBlue;
+                }
+            }
+            if (((i==0) && (j==0)) || ((i==(height-1)) && (j==(width-1))) || ((i==(height-1)) && (j==0)) || ((i==0) && (j==(width-1))))
+            {
+                r=r/4;
+                b=b/4;
+                g=g/4;
+            }
+            else if ((i==0) || (i==(height-1)) || (j==0) || (j==(width-1)))
+            {
+                r=r/6;
+                g=g/6;
+                b=b/6;
+            }
+            else
+            {
+                r=r/9;
+                g=g/9;
+                b=b/9;
+            }
+            int rr=(r+0.5);
+            int gg=(g+0.5);
+            int bb=(b+0.5);
+            BYTE R=rr;
+            BYTE G=gg;
+            BYTE B=bb;
+            tempred[i][j]=R;
+            tempgreen[i][j]=G;
+            tempblue[i][j]=B;
+        }
+    }
+    for(int p=0;p<height;p++)
+    {
+        for(int o=0;o<width;o++)
+        {
+            image[p][o].rgbtRed=tempred[p][o];
+            image[p][o].rgbtGreen=tempgreen[p][o];
+            image[p][o].rgbtBlue=tempblue[p][o];
+        }
+    }
+    return;
+}

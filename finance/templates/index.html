@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <table class=="table table-striped">
+        <thead>
+            <tr>
+                <th>SYMBOL</th>
+                <th>NAME</th>
+                <th>SHARES</th>
+                <th>PRICE</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in row%}
+            <tr>
+                <td>{{i.key}}</td>
+                <td>{{i.s_name}}</td>
+                <td>{{i["sum(shares)"]}}</td>
+                <td>{{i["c_p"]|usd}}</td>
+                <td>{{i["total"]|usd}}</td>
+            </tr>
+            {%endfor%}
+            <tr>
+                <td>CASH</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    {{cash|usd}}
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{grandtotal|usd}}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

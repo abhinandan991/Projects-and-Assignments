@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <p>The price of {{dic.name}} ({{dic.symbol}}) is {{dic.price|usd}} </p>
+{% endblock %}
