@@ -1,1 +1,0 @@
-SELECT DISTINCT title FROM people, stars, movies, ratings WHERE name="Chadwick Boseman" AND movies.id=stars.movie_id AND people.id=stars.person_id AND ratings.movie_id=movies.id ORDER BY rating DESC LIMIT 5;
